@@ -44,6 +44,8 @@ for i in {0..8}; do
 							echo -e "目标:${iplocal[i]}[${iplise[i]}]\t回程线路:\033[1;33m联通9929\033[0m"
 						else
 							echo -e "目标:${iplocal[i]}[${iplise[i]}]\t回程线路:\033[1;33m联通169\033[0m"
+						fi
+					fi
 				fi
 			else				
 				grep -q "203\.160\."  /root/traceroute_testlog
