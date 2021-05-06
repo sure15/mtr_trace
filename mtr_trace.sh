@@ -39,7 +39,7 @@ for i in {0..8}; do
 					if [ $? == 0 ];then
 						echo -e "目标:${iplocal[i]}[${iplise[i]}]\t回程线路:\033[1;33m联通9929\033[0m"
 					else
-						grep -q "210\." /root/traceroute_testlog
+						grep -q "210\.[0-9]{0,3}\." /root/traceroute_testlog
 						if [ $? == 0 ];then
 							echo -e "目标:${iplocal[i]}[${iplise[i]}]\t回程线路:\033[1;33m联通9929\033[0m"
 						else
