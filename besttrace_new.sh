@@ -18,10 +18,12 @@ for i in {0..8}; do
 	./besttrace2021 -q 1  ${iplise[i]} > /root/traceroute_testlog
 	grep -q "59\.43\." /root/traceroute_testlog
 	if [ $? == 0 ];then
-		grep -q "202\.97\."  /root/traceroute_testlog
-		if [ $? == 0 ];then
+		num=$(grep -q -c "202\.97\."  /root/traceroute_testlog)
+		if [ $(($num)) -gt 1 ];then
+		echo $(($num))
 		echo -e "目标:${iplocal[i]}[${iplise[i]}]\t回程线路:\033[1;32m电信CN2 GT\033[0m"
 		else
+		echo $(($num))
 		echo -e "目标:${iplocal[i]}[${iplise[i]}]\t回程线路:\033[1;31m电信CN2 GIA\033[0m"
 		fi
 	else
