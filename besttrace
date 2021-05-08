@@ -5,14 +5,17 @@ read -p "按Enter(回车)开始启动检查..." sdad
 #iplocal=(北京电信 北京联通 北京移动 上海电信 河北联通 上海移动 深圳电信 深圳联通 深圳移动)
 iplise=(220.181.38.149 112.80.248.76 39.156.66.18 180.101.49.11 110.242.68.3 183.194.238.117 14.215.177.38 163.177.151.110 120.196.165.24)
 iplocal=(北京电信 南京联通 北京移动 南京电信 河北联通 上海移动 广州电信 广州联通 深圳移动)
-echo "开始安装mtr命令..."
-apt-get update && apt-get install mtr -y
-yum update && yum install mtr -y
-clear
+# install besttrace
+if [ ! -f "besttrace2021" ]; then
+    wget https://github.com/zq/shell/raw/master/besttrace2021
+    # unzip besttrace4linux.zip
+    chmod +x besttrace2021
+fi
+
 echo -e "\n正在测试,请稍等..."
 echo -e "——————————————————————————————\n"
 for i in {0..8}; do
-	mtr -r --n --tcp ${iplise[i]} > /root/traceroute_testlog
+	./besttrace2021 -q 1  ${iplise[i]} > /root/traceroute_testlog
 	grep -q "59\.43\." /root/traceroute_testlog
 	if [ $? == 0 ];then
 		grep -q "202\.97\."  /root/traceroute_testlog
